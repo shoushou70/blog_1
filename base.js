@@ -17,12 +17,12 @@ function Base(args) {
 			var childElements = [];					//存放临时节点对象的数组，解决被覆盖的问题
 			var node = [];								//用来存放父节点用的
 			for (var i = 0; i < elements.length; i ++) {
-				if (node.length == 0) node.push(document);		//如果默认没有父节点，就把document放入
+				if (node.length == 0) node.push(document);		
 				switch (elements[i].charAt(0)) {
 					case '#' :
-						childElements = [];				//清理掉临时节点，以便父节点失效，子节点有效
+						childElements = [];			
 						childElements.push(this.getId(elements[i].substring(1)));
-						node = childElements;		//保存父节点，因为childElements要清理，所以需要创建node数组
+						node = childElements;		
 						break;
 					case '.' : 
 						childElements = [];
@@ -467,14 +467,7 @@ Base.prototype.animate = function (obj) {
 		clearInterval(element.timer);
 		element.timer = setInterval(function () {
 		
-			/*
-				问题1：多个动画执行了多个列队动画，我们要求不管多少个动画只执行一个列队动画
-				问题2：多个动画数值差别太大，导致动画无法执行到目标值，原因是定时器提前清理掉了
-				
-				解决1：不管多少个动画，只提供一次列队动画的机会
-				解决2：多个动画按最后一个分动画执行完毕后再清理即可
-			*/
-			
+		
 			//创建一个布尔值，这个值可以了解多个动画是否全部执行完毕
 			var flag = true; //表示都执行完毕了
 			
