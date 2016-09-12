@@ -23,20 +23,7 @@ function addDomLoaded(fn) {
 		fn();
 	}
 	
-	if ((sys.opera && sys.opera < 9) || (sys.firefox && sys.firefox < 3) || (sys.webkit && sys.webkit < 525)) {
-		//无论采用哪种，基本上用不着了
-		/*timer = setInterval(function () {
-			if (/loaded|complete/.test(document.readyState)) { 	//loaded是部分加载，有可能只是DOM加载完毕，complete是完全加载，类似于onload
-				doReady();
-			}
-		}, 1);*/
-
-		timer = setInterval(function () {
-			if (document && document.getElementById && document.getElementsByTagName && document.body) {
-				doReady();
-			}
-		}, 1);
-	} else if (document.addEventListener) {//W3C
+	if (document.addEventListener) {//W3C
 		addEvent(document, 'DOMContentLoaded', function () {
 			fn();
 			removeEvent(document, 'DOMContentLoaded', arguments.callee);
@@ -59,14 +46,14 @@ function addEvent(obj, type, fn) {
 	} else {
 		//创建一个存放事件的哈希表(散列表)
 		if (!obj.events) obj.events = {};
-		//第一次执行时执行
+	
 		if (!obj.events[type]) {	
-			//创建一个存放事件处理函数的数组
+		
 			obj.events[type] = [];
-			//把第一次的事件处理函数先储存到第一个位置上
+			
 			if (obj['on' + type]) obj.events[type][0] = fn;
 		} else {
-			//同一个注册函数进行屏蔽，不添加到计数器中
+		
 			if (addEvent.equal(obj.events[type], fn)) return false;
 		}
 		//从第二次开始我们用事件计数器来存储
