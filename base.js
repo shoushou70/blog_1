@@ -1,6 +1,6 @@
 ﻿
 
-//前台调用
+
 var $ = function (args) {
 	return new Base(args);
 }
@@ -13,9 +13,9 @@ function Base(args) {
 	if (typeof args == 'string') {
 		//css模拟
 		if (args.indexOf(' ') != -1) {
-			var elements = args.split(' ');			//把节点拆开分别保存到数组里
-			var childElements = [];					//存放临时节点对象的数组，解决被覆盖的问题
-			var node = [];								//用来存放父节点用的
+			var elements = args.split(' ');			
+			var childElements = [];					
+			var node = [];								
 			for (var i = 0; i < elements.length; i ++) {
 				if (node.length == 0) node.push(document);		
 				switch (elements[i].charAt(0)) {
@@ -244,21 +244,6 @@ Base.prototype.removeClass = function (className) {
 	}
 	return this;
 }
-
-//添加link或style的CSS规则
-Base.prototype.addRule = function (num, selectorText, cssText, position) {
-	var sheet = document.styleSheets[num];
-	insertRule(sheet, selectorText, cssText, position);
-	return this;
-}
-
-//移除link或style的CSS规则
-Base.prototype.removeRule = function (num, index) {
-	var sheet = document.styleSheets[num];
-	deleteRule(sheet, index);
-	return this;
-}
-
 //设置表单字段元素
 Base.prototype.form = function (name) {
 	for (var i = 0; i < this.elements.length; i ++) {
@@ -512,10 +497,7 @@ Base.prototype.animate = function (obj) {
 					}
 					
 					if (parseInt(target) != parseInt(getStyle(element, attr))) flag = false;
-				}
-				
-				//document.getElementById('test').innerHTML += i + '--' + parseInt(target) + '--' + parseInt(getStyle(element, attr)) + '--' + flag + '<br />';
-				
+				}				
 			}
 			
 			if (flag) {
