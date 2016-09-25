@@ -1,4 +1,4 @@
-﻿//浏览器检测
+
 (function () {
 	window.sys = {};
 	var ua = navigator.userAgent.toLowerCase();	
@@ -39,12 +39,12 @@ function addDomLoaded(fn) {
 	}
 }
 
-//跨浏览器添加事件绑定
+
 function addEvent(obj, type, fn) {
 	if (typeof obj.addEventListener != 'undefined') {
 		obj.addEventListener(type, fn, false);
 	} else {
-		//创建一个存放事件的哈希表(散列表)
+		
 		if (!obj.events) obj.events = {};
 	
 		if (!obj.events[type]) {	
@@ -58,7 +58,7 @@ function addEvent(obj, type, fn) {
 		}
 		//从第二次开始我们用事件计数器来存储
 		obj.events[type][addEvent.ID++] = fn;
-		//执行事件处理函数
+		
 		obj['on' + type] = addEvent.exec;
 	}
 }
